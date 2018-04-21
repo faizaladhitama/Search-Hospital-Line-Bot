@@ -13,7 +13,8 @@ from linebot.models import (
 
 app = Flask(__name__)
 
-line_bot_api = LineBotApi('') #Your Channel Access Token
+#Your Channel Access Token
+line_bot_api = LineBotApi('') 
 handler = WebhookHandler('') #Your Channel Secret
 
 @app.route("/callback", methods=['POST'])
@@ -44,4 +45,4 @@ def handle_text_message(event):
 
 import os
 if __name__ == "__main__":
-    app.run(host='0.0.0.0',port=int(os.environ['PORT'])
+    app.run(host='0.0.0.0',port=int(os.environ['PORT']))

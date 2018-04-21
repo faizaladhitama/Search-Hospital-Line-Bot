@@ -57,6 +57,7 @@ def application(environ, start_response):
     # get X-Line-Signature header value
     signature = environ['HTTP_X_LINE_SIGNATURE']
 
+
     # get request body as text
     wsgi_input = environ['wsgi.input']
     content_length = int(environ['CONTENT_LENGTH'])

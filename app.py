@@ -31,6 +31,25 @@ line_bot_api = LineBotApi("vfKILEFUN3oaz79OgC4XOrPQ9jXbgBrKMdjkuFpEf/Fu9mjOKrR5+
 #Your Channel Secret
 handler = WebhookHandler("fb698ed6c00c04a7ced40856bddd6890")
 
+db = dict()
+
+@app.route("/callback", methods=['POST'])
+def callback():
+    # get X-Line-Signature header value
+    signature = request.headers['X-Line-Signature']
+
+    # get request body as text
+    body = request.get_data(as_text=True)
+    app.logger.info("Request body: " + body)
+
+    # handle webhook body
+    try:
+        handler.handle(body, signature)
+    except InvalidSignatureError:
+        abort(400)
+
+    return 'OK'
+
 #User send location
 @handler.add(MessageEvent, message=LocationMessage)
 def handle_location_message(event):
